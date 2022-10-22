@@ -16,3 +16,7 @@ dev = [
     "pytest-httpx",
     "pip-tools",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ['src']
+
