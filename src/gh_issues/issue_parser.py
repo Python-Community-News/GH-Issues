@@ -1,14 +1,14 @@
 import re
 from collections import defaultdict
 
-from github import get_issue
+from .github import get_issue
 from markdown_it import MarkdownIt
 from markdown_it.tree import SyntaxTreeNode
-from repo import Repo
+from .repo import Repo
 
 
 def get_content_issues(
-    body: dict[str, Any],
+    body: dict[str, str],
     issues_tag: str,
 ) -> list[int]:
     """
@@ -35,26 +35,3 @@ def parse_issue_markdown(text) -> dict[str, str]:
             issue_object[issue_key].append(n.children[0].content)
 
     return {key: "\n".join(value) for key, value in issue_object.items()}
-
-
-class Issue:
-    def __init__(self, id_: int, issue_fields: list, Repo: Repo):
-        self.id_ = id_
-        self.raw = get_issue(issue_id=self.episode_id, Repo=Repo)
-        self.body = parse_issue_markdown(self.raw["body"])
-
-        for key, value in self.body.items():
-            setattr(self, key, value)
-
-        for field in issue_fields:
-            issues = get_content_issues(self.body, field)
-            
-            setattr(
-                self,
-                field,
-                [get_issue(issue, Repo=Repo) for issue in issues],
-            )
-
-    @property
-    def title(self) -> str:
-        return self.raw["title"]

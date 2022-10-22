@@ -1,4 +1,5 @@
 import httpx
+from .repo import Repo
 
 
 def get_issue(
