@@ -1,0 +1,108 @@
+# Contributing
+
+## Code of Conduct
+Please review the [Code of Conduct](https://github.com/Python-Community-News/.github/blob/main/CODE_OF_CONDUCT.md) before contributing to this project.
+
+## Project Structure
+
+```
+.
+├── src
+│  └── gh_issues
+│     ├── __init__.py
+│     ├── github.py
+│     ├── issue_parser.py
+│     └── repo.py
+├── tests
+│  ├── conftest.py
+│  ├── test_github.py
+│  ├── test_issue.py
+│  ├── test_issue_parser.py
+│  └── test_repo.py
+├── CONTRIBUTING
+├── LICENSE
+├── pyproject.toml
+├── README.md
+├── requirements-dev.txt
+├── requirements-publish.txt
+└── requirements.txt
+```
+
+## Getting Started
+
+## Issue > Fork > Pull Request
+
+This is the prferred workflow for contributing to this project.
+
+1. Create an issue describing the feature or bug you want to fix
+2. Wait for feedback from the maintainers (don't move onto step 3 until you get a 👍 from the maintainers)
+3. Fork the repository
+4. Make your changes
+5. **TEST YOUR CHANGES** - See [Testing](#testing)
+6. Lint your code - See [Linting](#linting)
+7. Submit a pull request
+
+# Recommended Development Environment
+
+It's recommended that you use a virtual environment and pip to manage your dependencies.
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+```
+
+# Which requirements file should I use?
+
+If you are just using the project you will only need `requirements.txt`. To contribute to the project you will need `requirements-dev.txt`. You **SHOULD NOT** use `requirements-publish.txt` unless you are publishing the project to PyPI.
+
+The most common use case is to install the project for development.
+
+```bash
+`pip install -r requirements.txt -r requirements-dev.txt`
+```
+
+## Testing
+This project uses [pytest](https://docs.pytest.org/en/stable/) for testing. To run the tests use the following command:
+
+```bash
+python -m pytest
+```
+There are more settings in the pyproject.toml that configure the testing environment.
+
+### Coverage
+
+This project aims to have 100% (C0) test coverage. This is configured in the `pyproject.toml` file. Don't change the coverage settings unless you've consulted with the maintainers.
+
+## Linting
+
+This project uses [black](https://github.com/psf/black) and [isort](https://github.com/PyCQA/isort) for linting. To make this easier we have the linter and formatter configured in the `pyproject.toml` file. To run the linter and formatter use the following command:
+
+You can manually run the linter and formatter with the following commands:
+
+```bash
+python -m black src
+python -m isort src
+```
+
+### Pre-commit
+
+To make it easier to run the linter and formatter we have configured [pre-commit](https://pre-commit.com/). To install pre-commit run the following command:
+
+```bash
+brew install pre-commit
+pre-commit run --all-files
+```
+
+The project from then on will lint and format your code before you commit it.
+
+## Publishing
+
+> **NOTE:** You should not publish this project unless you are a maintainer. Or you are publishing your own fork of this project. If you are publishing your own fork of this project you should change the name of the project in the `pyproject.toml` file.
+
+Publishing is done using `setuptools` and `twine`. To publish the project you will need to install the `requirements-publish.txt` file. The version should be generated from the current git tag.
+
+```bash
+pip install -r requirements-publish.txt
+python -m build
+python -m twine upload dist/*
+```
