@@ -6,16 +6,20 @@ from markdown_it import MarkdownIt
 from markdown_it.tree import SyntaxTreeNode
 from .repo import Repo
 
+def _parse_text_dict(section: list[str]) -> str | None:
+    """Parse the issue dict into a string. If the list is empty, return None"""
+    if section == []:
+        return
+    return "\n".join([value for value in section if value])
+
 
 def get_content_issues(
-    body: dict[str, str],
-    issues_tag: str,
-) -> list[int]:
+    section: str,
+) -> list[str]:
     """
     Returns Issues Passed in sections of the issue body
     """
-    issues = body.get(issues_tag, "")
-    return [int(n) for n in re.findall(r"\d+", issues)]
+    return re.findall(r"\d+", section)
 
 
 def parse_issue_markdown(text) -> dict[str, str]:
@@ -29,9 +33,8 @@ def parse_issue_markdown(text) -> dict[str, str]:
     for n in node.children:
         if n.type == "heading":
             issue_key = n.children[0].content.lower().replace(" ", "_")
-        elif content := n.children[0].content == "_No response_":
-            continue
+            issue_object[issue_key] 
         else:
             issue_object[issue_key].append(n.children[0].content)
 
-    return {key: "\n".join(value) for key, value in issue_object.items()}
+    return {key: _parse_text_dict(value) for key, value in issue_object.items()}

@@ -1,9 +1,10 @@
 import httpx
 from .repo import Repo
+import os
 
 
 def get_issue(
-    Repo: Repo,
+    repo: Repo,
     issue_id: int,
     api_token: str | None = None
 ) -> dict[str, str]:
@@ -13,18 +14,23 @@ def get_issue(
     """
 
     url = (
-        f"https://api.github.com/repos/{Repo.owner}/{Repo.repo}/issues/{str(issue_id)}"
+        f"{repo.url}/issues/{str(issue_id)}"
     )
     
     if api_token:
         headers = {
             "Authorization": f"Bearer {api_token}",
         }
-        request = httpx.get(url, headers=headers)
-    else:
-        request = httpx.get(url)
     
-        if request.status_code not in [200, 201]:
-            raise ConnectionRefusedError(f"Unable to connect: {request.json()}") # TODO Better error handling
+    elif (api_token := os.environ.get('GITHUB_API_TOKEN', None)):
+        headers = {
+            "Authorization": f"Bearer {api_token}",
+        }  
+    else:
+        headers = {}
+    
+    response = httpx.get(url, headers=headers)
+    if response.status_code not in [200, 201]:
+        raise ConnectionRefusedError(f"Unable to connect: {response.json()}") # TODO Better error handling
 
-    return request.json()
+    return response.json()
