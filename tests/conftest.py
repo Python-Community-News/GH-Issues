@@ -4,7 +4,7 @@ from gh_issues.issue_parser import parse_issue_markdown
 
 @pytest.fixture(scope="session")
 def test_repo():
-    return Repo(owner="kjaymiller", repo="Python-Community-News")
+    return Repo(owner="Python-Community-News", repo="Topics")
 
 
 @pytest.fixture(scope="session")
@@ -35,7 +35,7 @@ issue_response = {
     "id": 1409402210,
     "node_id": "I_kwDOH-F6O85UAcVi",
     "number": 14,
-    "title": "Python Developers Survey 2022 Now Open",
+    "title": "Test Issue",
     "user": {
         "login": "jonafato",
         "id": 392720,
