@@ -1,22 +1,36 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "gh_issues"
-version = "0.0.1"
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["github", "issues", "markdown"]
+license = {"text"="MIT"}
 dependencies = [
     "httpx",
     "markdown-it-py",
 ]
+dynamic = ["version"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
 
 [project.optional-dependencies]
 dev = [
     "pytest",
     "pytest-httpx",
     "pip-tools",
+    "pytest-cov",
 ]
 
 [tool.pytest.ini_options]
 pythonpath = ['src']
+addopts = [
+    "--cov=src/gh_issues",
+    "--cov-report=term-missing",
+    "--cov-fail-under=100",
+    ]
 
