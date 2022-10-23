@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools", "setuptools-scm"]
+requires = ["setuptools", "setuptools-scm", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -25,6 +25,11 @@ dev = [
     "pip-tools",
     "pytest-cov",
 ]
+publish = [
+    "twine",
+    ]
+
+[tool.setuptools_scm]
 
 [tool.pytest.ini_options]
 pythonpath = ['src']
@@ -32,5 +37,5 @@ addopts = [
     "--cov=src/gh_issues",
     "--cov-report=term-missing",
     "--cov-fail-under=100",
-    ]
+]
 
