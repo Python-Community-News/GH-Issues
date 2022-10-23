@@ -34,7 +34,7 @@ class Issue:
     
     def get_content_issues(self, field_name: str) -> list['Issue']:
         for issue in get_content_issues(getattr(self, field_name)):
-            yield type(self).from_issue_number.(self._repo, issue)
+            yield type(self).from_issue_number(self._repo, issue)
 
     @classmethod
     def from_issue_number(cls, repo: Repo, issue_id: int, api_token: str | None=None) -> 'Issue':
