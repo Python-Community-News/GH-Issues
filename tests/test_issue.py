@@ -18,7 +18,7 @@ def test_issue_from_issue_number(test_repo, issue_json, httpx_mock):
     )
 
     with httpx.Client() as _:
-        issue = Issue.from_issue_number(repo=test_repo, issue_id=14)
+        issue = Issue.from_issue_number(repo=test_repo, issue_number=14)
         assert issue._number == 14
 
 
