@@ -40,12 +40,12 @@ class Issue:
 
     @classmethod
     def from_issue_number(
-        cls, repo: Repo, issue_id: int, api_token: str | None = None
+        cls, repo: Repo, issue_number: int, api_token: str | None = None
     ) -> "Issue":
         """Get an issue from a repo. This is the preferred method of getting an issue as it also fetches the issue data"""
         issue = get_issue(
             repo=repo,
-            issue_number=issue_id,
+            issue_number=issue_number,
             api_token=api_token,
         )
 
