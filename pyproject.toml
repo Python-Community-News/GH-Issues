@@ -24,12 +24,14 @@ dev = [
     "pytest-httpx",
     "pip-tools",
     "pytest-cov",
+    "pre-commit",
 ]
 publish = [
     "twine",
     ]
 
 [tool.setuptools_scm]
+local_scheme = "no-local-version"
 
 [tool.pytest.ini_options]
 pythonpath = ['src']
@@ -38,4 +40,3 @@ addopts = [
     "--cov-report=term-missing",
     "--cov-fail-under=100",
 ]
-
