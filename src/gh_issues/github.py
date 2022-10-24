@@ -13,7 +13,7 @@ def get_issue(
     This is a wrapper around the GitHub API Issue call.
     """
 
-    url = f"{repo.url}/issues/{str(issue_id)}"
+    url = f"{repo.url}/issues/{str(issue_number)}"
 
     if api_token:
         headers = {
