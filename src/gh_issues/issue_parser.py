@@ -1,10 +1,12 @@
 import re
 from collections import defaultdict
 
-from .github import get_issue
 from markdown_it import MarkdownIt
 from markdown_it.tree import SyntaxTreeNode
+
+from .github import get_issue
 from .repo import Repo
+
 
 def _parse_text_dict(section: list[str]) -> str | None:
     """Parse the issue dict into a string. If the list is empty, return None"""
@@ -29,11 +31,11 @@ def parse_issue_markdown(text) -> dict[str, str]:
     tokens = md.parse(text)
     node = SyntaxTreeNode(tokens)
     issue_object = defaultdict(list)
-    
+
     for n in node.children:
         if n.type == "heading":
             issue_key = n.children[0].content.lower().replace(" ", "_")
-            issue_object[issue_key] 
+            issue_object[issue_key]
         else:
             issue_object[issue_key].append(n.children[0].content)
 

@@ -1,6 +1,8 @@
 import pytest
+
 from gh_issues import Repo
 from gh_issues.issue_parser import parse_issue_markdown
+
 
 @pytest.fixture(scope="session")
 def test_repo():
@@ -21,7 +23,7 @@ Aliquip eiusmod minim excepteur officia **tempor** est incididunt adipisicing el
 
 Laboris anim pariatur nisi mollit. Qui nostrud id ipsum quis mollit aliqua est amet tempor Nonea. Aute pariatur ullamco qui consequat anim ad nisi ex sit. Quis officia esse incididunt tempor aliqua quis qui est amet. Nisi nostrud sit ea anim voluptate. Est amet mollit consectetur sit et aliquip pariatur nisi enim. Ex sit enim do culpa consectetur irure est duis minim magna do eiusmod est.
 """
-    
+
     return parse_issue_markdown(issue_text)
 
 
@@ -54,17 +56,17 @@ issue_response = {
         "events_url": "https://api.github.com/users/jonafato/events{/privacy}",
         "received_events_url": "https://api.github.com/users/jonafato/received_events",
         "type": "User",
-        "site_admin": False
+        "site_admin": False,
     },
     "labels": [
         {
-        "id": 4635205915,
-        "node_id": "LA_kwDOH-F6O88AAAABFEehGw",
-        "url": "https://api.github.com/repos/Python-Community-News/Topics/labels/content",
-        "name": "content",
-        "color": "538132",
-        "default": False,
-        "description": ""
+            "id": 4635205915,
+            "node_id": "LA_kwDOH-F6O88AAAABFEehGw",
+            "url": "https://api.github.com/repos/Python-Community-News/Topics/labels/content",
+            "name": "content",
+            "color": "538132",
+            "default": False,
+            "description": "",
         }
     ],
     "state": "closed",
@@ -97,7 +99,7 @@ issue_response = {
         "events_url": "https://api.github.com/users/kjaymiller/events{/privacy}",
         "received_events_url": "https://api.github.com/users/kjaymiller/received_events",
         "type": "User",
-        "site_admin": False
+        "site_admin": False,
     },
     "reactions": {
         "url": "https://api.github.com/repos/Python-Community-News/Topics/issues/14/reactions",
@@ -109,12 +111,13 @@ issue_response = {
         "confused": 0,
         "heart": 0,
         "rocket": 0,
-        "eyes": 0
+        "eyes": 0,
     },
     "timeline_url": "https://api.github.com/repos/Python-Community-News/Topics/issues/14/timeline",
     "performed_via_github_app": None,
-    "state_reason": "completed"
+    "state_reason": "completed",
 }
+
 
 @pytest.fixture(scope="session")
 def issue_json():
