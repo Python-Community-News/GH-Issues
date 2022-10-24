@@ -13,11 +13,18 @@ repos:
     rev: 22.10.0
     hooks:
     - id: black
-      language_version: python3.10
 # iSort Pre-Commit Hook:
 -   repo: https://github.com/PyCQA/isort
     rev: 5.10.1
     hooks:
     - id: isort
-      language_version: python3.10
-      profile: black
+# Pip-Tools Pre-Commit Hook:
+-   repo: https://github.com/jazzband/pip-tools
+    rev: 6.9.0
+    hooks:
+    - id: pip-compile
+      files: ^(pyproject\.toml|requirements\.txt)$
+      args: [--extra=dev, -o, requirements.txt, pyproject.toml]
+    - id: pip-compile
+      files: ^(pyproject\.toml|requirements\.in)$
+      args: [--extra=publish, --extra=dev, -o, requirements-publish.txt, pyproject.toml]
