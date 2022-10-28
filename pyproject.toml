@@ -24,6 +24,7 @@ dev = [
     "pytest-httpx",
     "pip-tools",
     "pytest-cov",
+    "pre-commit",
 ]
 publish = [
     "twine",
