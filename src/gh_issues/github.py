@@ -6,10 +6,10 @@ from .repo import Repo
 
 
 def get_issue(
-    repo: Repo, issue_id: int, api_token: str | None = None
+    repo: Repo, issue_number: int, api_token: str | None = None
 ) -> dict[str, str]:
     """
-    Returns the issue with the given id.
+    Returns the issue with the given number.
     This is a wrapper around the GitHub API Issue call.
     """
 
