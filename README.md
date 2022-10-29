@@ -58,4 +58,4 @@ This project is licensed under the terms of the [MIT License](LICENSE).
 
 # Code of Conduct
 
-This project is governed by the Contributor Covenant [Code of Conduct](https://github.com/Python-Community-News/.github/blob/main/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to <kjaymiller@gmail.com>
+This project is governed by the Contributor Covenant [Code of Conduct](https://github.com/Python-Community-News/GH-Issues/blob/main/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to <kjaymiller@gmail.com>
