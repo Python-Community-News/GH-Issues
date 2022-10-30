@@ -50,7 +50,7 @@ for issue in Issue.get_content_issues('issue_header'):
 
 # Contributing
 
-Review the [Contributing Guidelines](https://github.com/Python-Community-News/GH-Issues/blob/main/CONTRIBUTING) for information on how to contribute to this project.
+Review the [Contributing Guidelines](https://github.com/Python-Community-News/.github/blob/main/CONTRIBUTING) for information on how to contribute to this project.
 
 # License
 
