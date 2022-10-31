@@ -48,14 +48,6 @@ for issue in Issue.get_content_issues('issue_header'):
 >>> <Issue - #2: This is the issue #2 Title by @user>
 ```
 
-# Contributing
+## Community Standards
 
-Review the [Contributing Guidelines](CONTRIBUTING.md) for information on how to contribute to this project.
-
-# License
-
-This project is licensed under the terms of the [MIT License](LICENSE).
-
-# Code of Conduct
-
-This project is governed by the Contributor Covenant [Code of Conduct](https://github.com/Python-Community-News/.github/blob/main/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to <kjaymiller@gmail.com>
+This project adheres to the standards highlighted in the [organization repo](https://github.com/python-community-news/.github). You should be able to find the code of conduct, contributing guidelines, and other community standards in the **GitHub Interface** or the [organization repo](https://github.com/python-community-news/.github).
