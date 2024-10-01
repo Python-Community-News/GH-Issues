@@ -15,4 +15,4 @@ jobs:
     steps:
       - uses: wntrblm/nox@2024.04.15
         with:
-          python-versions: "2.7, 3.5, 3.11, pypy-3.9"
+          python-versions: "3.10, 3.11, 3.12, 3.13"
