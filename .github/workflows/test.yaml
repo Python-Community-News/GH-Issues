@@ -11,7 +11,7 @@ on:
 
 jobs:
   test:
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: wntrblm/nox@2024.04.15
         with:
