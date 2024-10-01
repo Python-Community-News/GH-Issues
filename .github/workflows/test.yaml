@@ -11,8 +11,8 @@ on:
 
 jobs:
   test:
-  runs_on: ubuntu-latest
-  steps:
-    - uses: wntrblm/nox
-      with:
-        python-versions: "2.7, 3.5, 3.11, pypy-3.9"
+    runs_on: ubuntu-latest
+    steps:
+      - uses: wntrblm/nox
+        with:
+          python-versions: "2.7, 3.5, 3.11, pypy-3.9"
