@@ -13,6 +13,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: wntrblm/nox@2024.04.15
         with:
           python-versions: "3.10, 3.11, 3.12, 3.13"
