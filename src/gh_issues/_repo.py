@@ -1,5 +1,7 @@
 import dataclasses
 
+from ._api import API_URL_BASE
+
 
 @dataclasses.dataclass
 class Repo:
@@ -8,4 +10,4 @@ class Repo:
 
     @property
     def url(self):
-        return f"https://api.github.com/repos/{self.owner}/{self.repo}"
+        return f"{API_URL_BASE}/repos/{self.owner}/{self.repo}"

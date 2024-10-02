@@ -1,8 +1,8 @@
 import typing
 
-from .github import get_issue
-from .issue_parser import get_content_issues, parse_issue_markdown
-from .repo import Repo
+from ._github import _get_issue, _request_issue_by_query
+from ._issue_parser import get_content_issues, parse_issue_markdown
+from ._repo import Repo
 
 
 class Issue:
@@ -43,10 +43,17 @@ class Issue:
         cls, repo: Repo, issue_id: int, api_token: str | None = None
     ) -> "Issue":
         """Get an issue from a repo. This is the preferred method of getting an issue as it also fetches the issue data"""
-        issue = get_issue(
+        issue = _get_issue(
             repo=repo,
             issue_id=issue_id,
             api_token=api_token,
         )
 
         return cls(repo=repo, issue=issue)
+
+
+def issues_by_query(query: str, api_token: str):
+    """iterates through the reuqests_issue_query creating an Issue object per request"""
+    issues = _requests_issue_by_query(query, api_token)
+    for issue in issues:
+        yield issue

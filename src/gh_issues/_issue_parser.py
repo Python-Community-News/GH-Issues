@@ -4,8 +4,8 @@ from collections import defaultdict
 from markdown_it import MarkdownIt
 from markdown_it.tree import SyntaxTreeNode
 
-from .github import get_issue
-from .repo import Repo
+from ._github import _get_issue
+from ._repo import Repo
 
 
 def _parse_text_dict(section: list[str]) -> str | None:

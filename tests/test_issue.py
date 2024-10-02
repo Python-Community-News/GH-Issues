@@ -1,8 +1,6 @@
 import httpx
-from pytest_httpx import httpx_mock
 
 from gh_issues import Issue
-from gh_issues.repo import Repo
 
 # 14 is just the issue number that was pulled to test this package
 

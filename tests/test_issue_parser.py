@@ -1,7 +1,4 @@
-import httpx
-import pytest
-
-from gh_issues.issue_parser import get_content_issues, parse_issue_markdown
+from gh_issues._issue_parser import get_content_issues, parse_issue_markdown
 
 
 def test_get_content_issues():

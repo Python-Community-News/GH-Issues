@@ -1,7 +1,7 @@
 import pytest
 
 from gh_issues import Repo
-from gh_issues.issue_parser import parse_issue_markdown
+from gh_issues._issue_parser import parse_issue_markdown
 
 
 @pytest.fixture(scope="session")
