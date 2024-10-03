@@ -24,7 +24,7 @@ def __check_for_response(url: str, api_token=None) -> httpx.Response:
     return response.json()
 
 
-def _get_issue(
+def request_issue(
     repo: Repo, issue_id: int, api_token: str | None = None
 ) -> dict[str, str]:
     """
@@ -36,7 +36,7 @@ def _get_issue(
     return __check_for_response(url=url, api_token=api_token)
 
 
-def _request_issue_by_query(query: str, api_token: str | None = None) -> dict[str, str]:
+def request_issues_by_query(query: str, api_token: str | None = None) -> dict[str, str]:
     """api call to get issues that match a query"""
 
     url = f"{API_URL_BASE}/search/issues?q={urllib.parse.quote(query, safe='')}"

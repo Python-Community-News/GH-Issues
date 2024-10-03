@@ -1,15 +1,12 @@
 import httpx
 import pytest
+from conftest import TEST_REPO_URL, TEST_QUERY_URL
 from gh_issues._github import (
     __check_for_response,
     _api_token_headers,
-    _get_issue,
-    _request_issue_by_query,
+    request_issue,
+    request_issues_by_query,
 )
-
-
-TEST_REPO_URL = "https://api.github.com/repos/Python-Community-News/Topics/issues/1"
-TEST_QUERY_URL = "https://api.github.com/search/issues?q=this%20test"
 
 
 def test_api_token_headers_with_token():
@@ -64,7 +61,7 @@ def test_request_raises_error_on_404(httpx_mock, test_repo, api_token):
 
     with httpx.Client() as _:
         with pytest.raises(ConnectionRefusedError):
-            request = _get_issue(test_repo, "1", api_token=api_token)
+            request = request_issue(test_repo, "1", api_token=api_token)
 
 
 def test_issues_by_query(httpx_mock):
@@ -74,4 +71,4 @@ def test_issues_by_query(httpx_mock):
     )
 
     with httpx.Client() as _:
-        request = _request_issue_by_query("this test")
+        request = request_issues_by_query("this test")

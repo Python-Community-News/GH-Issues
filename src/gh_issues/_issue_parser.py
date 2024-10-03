@@ -4,9 +4,6 @@ from collections import defaultdict
 from markdown_it import MarkdownIt
 from markdown_it.tree import SyntaxTreeNode
 
-from ._github import _get_issue
-from ._repo import Repo
-
 
 def _parse_text_dict(section: list[str]) -> str | None:
     """Parse the issue dict into a string. If the list is empty, return None"""

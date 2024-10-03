@@ -4,6 +4,10 @@ from gh_issues import Repo
 from gh_issues._issue_parser import parse_issue_markdown
 
 
+TEST_REPO_URL = "https://api.github.com/repos/Python-Community-News/Topics/issues/1"
+TEST_QUERY_URL = "https://api.github.com/search/issues?q=this%20test"
+
+
 @pytest.fixture(scope="session")
 def test_repo():
     return Repo(owner="Python-Community-News", repo="Topics")

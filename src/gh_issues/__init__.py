@@ -1,6 +1,6 @@
 import typing
 
-from ._github import _get_issue, _request_issue_by_query
+from ._github import request_issue, request_issues_by_query
 from ._issue_parser import get_content_issues, parse_issue_markdown
 from ._repo import Repo
 
@@ -17,8 +17,11 @@ class Issue:
         for key, value in issue.items():
             setattr(self, f"_{key}", value)
 
-        for key, value in parse_issue_markdown(issue["body"]).items():
-            setattr(self, key, value)
+        try:
+            for key, value in parse_issue_markdown(issue["body"]).items():
+                setattr(self, key, value)
+        except UnboundLocalError:
+            self.body = issue["body"]
 
     @property
     def issue_fields(self) -> typing.Generator[str, None, None]:
@@ -43,7 +46,7 @@ class Issue:
         cls, repo: Repo, issue_id: int, api_token: str | None = None
     ) -> "Issue":
         """Get an issue from a repo. This is the preferred method of getting an issue as it also fetches the issue data"""
-        issue = _get_issue(
+        issue = request_issue(
             repo=repo,
             issue_id=issue_id,
             api_token=api_token,
@@ -52,8 +55,12 @@ class Issue:
         return cls(repo=repo, issue=issue)
 
 
-def issues_by_query(query: str, api_token: str):
+def issues_by_query(query: str, api_token: str | None = None) -> typing.Iterator[Issue]:
     """iterates through the reuqests_issue_query creating an Issue object per request"""
-    issues = _requests_issue_by_query(query, api_token)
-    for issue in issues:
-        yield issue
+    issues = request_issues_by_query(query, api_token)
+
+    for issue in issues["items"]:
+        yield Issue(
+            repo=Repo.from_url(issue["repository_url"]),
+            issue=issue,
+        )
