@@ -1,51 +1,74 @@
 import httpx
 import pytest
-
-from gh_issues.github import get_issue
-
-
-def test_get_issue_passes_correct_url(httpx_mock, test_repo):
-    httpx_mock.add_response(
-        url="https://api.github.com/repos/Python-Community-News/Topics/issues/1",
-        json={"id": 1},
-    )
-
-    with httpx.Client() as _:
-        request = get_issue(test_repo, "1")
+from conftest import TEST_REPO_URL, TEST_QUERY_URL
+from gh_issues._github import (
+    __check_for_response,
+    _api_token_headers,
+    request_issue,
+    request_issues_by_query,
+)
 
 
-def test_request_passes_in_api_token(httpx_mock, test_repo):
-    """Test that the API token is passed in the request"""
-    httpx_mock.add_response(
-        url="https://api.github.com/repos/Python-Community-News/Topics/issues/1",
-        json={"id": 1},
-        match_headers={"Authorization": "Bearer test"},
-    )
+def test_api_token_headers_with_token():
+    """
+    tests that a string can be passed into the _api_token_headers
+    and returns a bearer token header
+    """
 
-    with httpx.Client() as _:
-        request = get_issue(test_repo, "1", api_token="test")
+    assert _api_token_headers("test") == {"Authorization": "Bearer test"}
 
 
-def test_request_api_from_env(monkeypatch, httpx_mock, test_repo):
-    """Test that the API token is read from the environment variable"""
+def test_api_token_header_with_env_var(monkeypatch):
+    """
+    tests that the GITHUB_API_TOKEN environment variable can be passed into the _api_token_headers
+    and returns a bearer token header
+    """
+
     monkeypatch.setenv("GITHUB_API_TOKEN", "test")
+    assert _api_token_headers("test") == {"Authorization": "Bearer test"}
+
+
+def test__check_for_response_returns_response(httpx_mock, test_repo):
     httpx_mock.add_response(
-        url="https://api.github.com/repos/Python-Community-News/Topics/issues/1",
+        url=TEST_REPO_URL,
         json={"id": 1},
-        match_headers={"Authorization": "Bearer test"},
     )
 
     with httpx.Client() as _:
-        request = get_issue(test_repo, "1")
+        response = __check_for_response(TEST_REPO_URL)
+        assert response["id"] == 1
 
 
-def test_request_raises_error_on_404(httpx_mock, test_repo):
+def test_request_raises_error_on_404(httpx_mock):
     httpx_mock.add_response(
-        url="https://api.github.com/repos/Python-Community-News/Topics/issues/1",
+        url=TEST_REPO_URL,
         status_code=404,
         json={"id": 1},
     )
 
     with httpx.Client() as _:
         with pytest.raises(ConnectionRefusedError):
-            request = get_issue(test_repo, "1")
+            request = __check_for_response(TEST_REPO_URL, "1")
+
+
+@pytest.mark.parametrize("api_token", [None, "test"])
+def test_request_raises_error_on_404(httpx_mock, test_repo, api_token):
+    httpx_mock.add_response(
+        url=TEST_REPO_URL,
+        status_code=404,
+        json={"id": 1},
+    )
+
+    with httpx.Client() as _:
+        with pytest.raises(ConnectionRefusedError):
+            request = request_issue(test_repo, "1", api_token=api_token)
+
+
+def test_issues_by_query(httpx_mock):
+    httpx_mock.add_response(
+        url=TEST_QUERY_URL,
+        json={"id": 1},
+    )
+
+    with httpx.Client() as _:
+        request = request_issues_by_query("this test")

@@ -1,4 +1,4 @@
-from gh_issues import Repo
+from gh_issues._repo import Repo
 
 
 def test_repo_url():
